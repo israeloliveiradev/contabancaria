@@ -1,10 +1,9 @@
 package conta;
 
-import java.util.LinkedList;
 import java.util.Locale;
-import java.util.Queue;
 import java.util.Scanner;
 
+import conta.model.Conta;
 import conta.util.Cores;
 
 public class Menu {
@@ -13,7 +12,16 @@ public class Menu {
 		Locale.setDefault(Locale.US);
 		Scanner input = new Scanner(System.in);
 
-		Queue<String> fila = new LinkedList<String>();
+
+		// TESTE CLASSE CONTA
+
+		Conta c1 = new Conta(1, 123, 1, "Israel", 10000.0f);
+		c1.visualizar();
+		c1.sacar(12000.0f);
+		c1.visualizar();
+		c1.depositar(5000.0f);
+		c1.visualizar();
+
 
 		int opcao;
 
