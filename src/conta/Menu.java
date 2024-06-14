@@ -3,8 +3,9 @@ package conta;
 import java.util.Locale;
 import java.util.Scanner;
 
-import conta.model.Conta;
 import conta.util.Cores;
+import conta.model.ContaCorrente;
+import conta.model.ContaPoupanca;
 
 public class Menu {
 
@@ -13,18 +14,30 @@ public class Menu {
 		Scanner input = new Scanner(System.in);
 
 
-		// TESTE CLASSE CONTA
 
-		Conta c1 = new Conta(1, 123, 1, "Israel", 10000.0f);
-		c1.visualizar();
-		c1.sacar(12000.0f);
-		c1.visualizar();
-		c1.depositar(5000.0f);
-		c1.visualizar();
+		// TESTE CLASSE CONTA CORRENTE
+
+		ContaCorrente cc1 = new ContaCorrente(2, 123, 1, "Rebeca", 15000.0f, 1000.0f);
+		cc1.visualizar();
+		cc1.sacar(12000.0f);
+		cc1.visualizar();
+		cc1.depositar(5000.0f);
+		cc1.visualizar();
+
+		// TESTE CLASSE CONTA POUPANÇA
+
+		ContaPoupanca cp1 = new ContaPoupanca(3, 123, 2, "Ethan", 100000.0f, 15);
+		cp1.visualizar();
+		cp1.sacar(1000.0f);
+		cp1.visualizar();
+		cp1.depositar(5000.0f);
+		cp1.visualizar();
+
 
 
 		int opcao;
 
+			while (true) {
 
 			System.out.println(Cores.TEXT_WHITE_BOLD + Cores.ANSI_BLACK_BACKGROUND
 					+          "***************************************************");
@@ -44,12 +57,7 @@ public class Menu {
 			System.out.println("*         9 - Sair                                *");
 			System.out.println("*                                                 *");
 			System.out.println("***************************************************" + Cores.TEXT_RESET);
-
-
-
-			while (true) {
 			System.out.printf( Cores.TEXT_WHITE_BOLD + "\nDigite a opção desejada: ");
-
 			opcao = input.nextInt();
 
 			if (opcao == 9) {
