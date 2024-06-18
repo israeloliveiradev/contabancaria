@@ -23,13 +23,12 @@ public class Menu {
 		String titular;
 		float saldo, limite;
 
-
 		int opcao;
 
-			while (true) {
+		while (true) {
 
 			System.out.println(Cores.TEXT_WHITE_BOLD + Cores.ANSI_BLACK_BACKGROUND
-					+          "***************************************************");
+					+ "***************************************************");
 			System.out.println("*                                                 *");
 			System.out.println("*            BANCO CORINTHIANS 2012               *");
 			System.out.println("*                                                 *");
@@ -46,21 +45,21 @@ public class Menu {
 			System.out.println("*         9 - Sair                                *");
 			System.out.println("*                                                 *");
 			System.out.println("***************************************************" + Cores.TEXT_RESET);
-			System.out.println( Cores.TEXT_WHITE_BOLD + "\nDigite a opção desejada: ");
+			System.out.println(Cores.TEXT_WHITE_BOLD + "\nDigite a opção desejada: ");
 			System.out.println("\n");
 
 			try {
 				opcao = input.nextInt();
-			} catch(InputMismatchException e) {
+			} catch (InputMismatchException e) {
 				System.out.println("\nDigite Valores Inteiros: ");
 				input.nextLine();
 				opcao = 0;
 
 			}
 
-
 			if (opcao == 9) {
-				System.out.println(Cores.TEXT_WHITE_BOLD +"\nBanco Corinthians 2012: A Credibilidade de um Campeão.\n");
+				System.out
+						.println(Cores.TEXT_WHITE_BOLD + "\nBanco Corinthians 2012: A Credibilidade de um Campeão.\n");
 				sobre();
 				input.close();
 				System.exit(0);
@@ -69,7 +68,7 @@ public class Menu {
 			switch (opcao) {
 
 			case 1:
-				System.out.println(Cores.TEXT_WHITE_BOLD +"Criar Conta\n\n");
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Criar Conta\n\n");
 
 				System.out.println("Digite o Número da Agência: ");
 				agencia = input.nextInt();
@@ -77,12 +76,11 @@ public class Menu {
 				input.skip("\\R?");
 				titular = input.nextLine();
 
-
 				do {
 					System.out.println("Digite o Tipo da Conta (1 para Conta Corrente ou 2 Para Conta Poupança):");
 					tipo = input.nextInt();
 
-				} while(tipo < 1 && tipo > 2);
+				} while (tipo < 1 || tipo > 2);
 
 				System.out.println("Digite o Saldo da Conta (R$): ");
 				saldo = input.nextFloat();
@@ -94,56 +92,108 @@ public class Menu {
 					contas.cadastrar(new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite));
 				}
 
-				case 2 ->{
+				case 2 -> {
 					System.out.println("Digite o dia do Aniversário da Conta: ");
 					aniversario = input.nextInt();
-					contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
+					contas.cadastrar(
+							new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
 				}
 
 				}
 				keyPress();
 				break;
 
-
 			case 2:
-				System.out.println(Cores.TEXT_WHITE_BOLD +"Listar todas as contas\n\n");
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Listar todas as contas\n\n");
 
 				contas.listarTodas();
 				keyPress();
 				break;
 
 			case 3:
-				System.out.println(Cores.TEXT_WHITE_BOLD +"Consultar dados da Conta - por Número\n\n");
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Consultar dados da Conta - por Número\n\n");
+
+				System.out.println("Digite o número da Conta: ");
+				numero = input.nextInt();
+
+				contas.procurarPorNumero(numero);
 
 				keyPress();
 				break;
 
 			case 4:
-				System.out.println(Cores.TEXT_WHITE_BOLD +"Atualizar dados da Conta\n\n");
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Atualizar dados da Conta\n\n");
+
+				System.out.println("Digite o Número da Conta: ");
+				numero = input.nextInt();
+
+				var buscaConta = contas.buscarNaCollection(numero);
+
+				if (buscaConta != null) {
+
+					tipo = buscaConta.getTipo();
+
+					System.out.println("Digite o número da Agência: ");
+					agencia = input.nextInt();
+					System.out.println("Digite o nome do Titular: ");
+					input.skip("\\R?");
+					titular = input.nextLine();
+
+					System.out.println("Digit o saldo da conta (R$): ");
+					saldo = input.nextFloat();
+
+					switch (tipo) {
+					case 1 -> {
+						System.out.println("Digite o Limite de Crédito (R$): ");
+						limite = input.nextFloat();
+
+						contas.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, limite));
+					}
+
+					case 2 -> {
+						System.out.println("Digite o dia do Aniversário da Conta: ");
+						aniversario = input.nextInt();
+
+						contas.atualizar(new ContaPoupanca(numero, agencia, tipo, titular, saldo, aniversario));
+					}
+
+					default -> {
+						System.out.println("Tipo da Conta inválido!");
+					}
+					}
+				} else {
+					System.out.println("A conta não foi encontrada!");
+
+				}
 
 				keyPress();
 				break;
 
 			case 5:
-				System.out.println(Cores.TEXT_WHITE_BOLD +"Apagar a Conta\n\n");
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Apagar a Conta\n\n");
+
+				System.out.println("Digite o número da Conta: ");
+				numero = input.nextInt();
+
+				contas.deletar(numero);
 
 				keyPress();
 				break;
 
 			case 6:
-				System.out.println(Cores.TEXT_WHITE_BOLD +"Saque\n\n");
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Saque\n\n");
 
 				keyPress();
 				break;
 
 			case 7:
-				System.out.println(Cores.TEXT_WHITE_BOLD +"Deposíto\n\n");
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Deposíto\n\n");
 
 				keyPress();
 				break;
 
 			case 8:
-				System.out.println(Cores.TEXT_WHITE_BOLD +"Transferência entre Contas \n\n");
+				System.out.println(Cores.TEXT_WHITE_BOLD + "Transferência entre Contas \n\n");
 
 				keyPress();
 				break;
@@ -160,8 +210,8 @@ public class Menu {
 
 	public static void sobre() {
 
-		System.out.println(Cores.TEXT_WHITE_BOLD + Cores.ANSI_BLACK_BACKGROUND +
-				           "*********************************************************");
+		System.out.println(Cores.TEXT_WHITE_BOLD + Cores.ANSI_BLACK_BACKGROUND
+				+ "*********************************************************");
 		System.out.println("* Projeto Desenvolvido por: Israel Oliveira             *");
 		System.out.println("* Israel Oliveira - linkedin.com/in/israeloliveiradev/  *");
 		System.out.println("* github.com/israeloliveiradev                          *");

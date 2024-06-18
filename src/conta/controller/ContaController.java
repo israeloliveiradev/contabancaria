@@ -5,14 +5,19 @@ import java.util.ArrayList;
 import conta.model.Conta;
 import conta.repository.ContaRepository;
 
-public class ContaController implements ContaRepository{
+public class ContaController implements ContaRepository {
 
 	private ArrayList<Conta> listaContas = new ArrayList<Conta>();
 	int numero = 0;
 
 	@Override
 	public void procurarPorNumero(int numero) {
-		// TODO Auto-generated method stub
+		var conta = buscarNaCollection(numero);
+
+		if (conta!= null)
+			conta.visualizar();
+		else
+			System.out.println("\nA Conta número " + numero + " não foi encontrada");
 
 	}
 
@@ -27,25 +32,37 @@ public class ContaController implements ContaRepository{
 	@Override
 	public void cadastrar(Conta conta) {
 		listaContas.add(conta);
-		System.out.println("\n A Conta número: " + conta.getNumero() + " foi criada com Sucesso!");
+		System.out.println("\nA Conta número: " + conta.getNumero() + " foi criada com Sucesso!");
 
 	}
 
 	@Override
 	public void atualizar(Conta conta) {
-		// TODO Auto-generated method stub
+		var buscaConta = buscarNaCollection(conta.getNumero());
+
+		if (buscaConta != null) {
+			listaContas.set(listaContas.indexOf(buscaConta), conta);
+			System.out.println("\nA Conta número " + conta.getNumero() + " foi atualizada com sucesso!");
+		} else
+			System.out.println("\nA Conta número " + conta.getNumero() + " não foi encontrada!");
 
 	}
 
 	@Override
 	public void deletar(int numero) {
-		// TODO Auto-generated method stub
+		var conta = buscarNaCollection(numero);
+
+		if(conta != null) {
+			if (listaContas.remove(conta) == true);
+			System.out.println("\n A Conta número: " + numero + " foi excluida com sucesso!");
+		} else
+			System.out.println("\nAConta número: " + numero + " não foi encontrada!");
 
 	}
 
 	@Override
 	public void sacar(int numero, float valor) {
-		// TODO Auto-generated method stub
+
 
 	}
 
@@ -60,8 +77,19 @@ public class ContaController implements ContaRepository{
 		// TODO Auto-generated method stub
 
 	}
+
 	public int gerarNumero() {
-		return ++ numero;
+		return ++numero;
+	}
+
+	public Conta buscarNaCollection(int numero) {
+		for (var conta : listaContas) {
+			if (conta.getNumero() == numero) {
+				return conta;
+			}
+		}
+
+		return null;
 	}
 
 }
