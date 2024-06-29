@@ -162,13 +162,26 @@ ng serve
 
 ## 📷 Prints
 
-<p align="center">
-    <img src="https://i.imgur.com/Wr9pLhq.png"  alt="Menu"  width="400"><br>
-	<img src="https://i.imgur.com/LUs051M.png"  alt="Criação Conta"  width="400"><br>
-	<img src="https://i.imgur.com/qxPG5Oq.png"  alt="Listagem Contas"  width="400"><br>
-	<img src="https://i.imgur.com/cRWzDnC.png"  alt="Transferência entre contas"  width="400"><br>
+<table>
+    <tr>
+        <td><img src="https://i.imgur.com/Wr9pLhq.png" alt="Menu" width="700"></td>
+        <td><img src="https://i.imgur.com/LUs051M.png" alt="Criação Conta" width="700"></td>
+    <tr>
+    <tr>
+        <td><img src="https://i.imgur.com/qxPG5Oq.png" alt="Listagem Contas" width="700"></td>
+        <td><img src="https://i.imgur.com/cRWzDnC.png" alt="Transferência entre contas" width="700"></td>
+    <tr>
+    <tr>
+        <td><img src="https://i.imgur.com/gH0QDHK.png" alt="Sair" width="700"></td>
+        <td><img src="https://i.imgur.com/LznfX4N.png" alt="Busca conta por Número" width="700"></td>
+
+        
+        
+</table>
+
 
 </div>
+
 
 
 
