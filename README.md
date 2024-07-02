@@ -77,7 +77,7 @@
 
  <p align="center">
 
-- Melehoria no Menu de Opções
+- Melhoria no Menu de Opções
 - Tratamento de Exceções
 - Melhoria na Experiência do Usuário
 - Validação de Dados de Entrada
